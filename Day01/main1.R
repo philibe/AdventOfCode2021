@@ -8,9 +8,8 @@ colnames(datas)<-c("col0")
 
 answer<-(datas
          %>% mutate (
-           delta=lag(col0,n=1),
-           delta=if_else(is.na(delta),0,delta),
-           sup=if_else(col0>delta,1,0)
+           delta=lag(col0,n=1,  default = 0L),
+           sup=if_else(col0>delta,1L,0L)
          )
 )
 # answer
