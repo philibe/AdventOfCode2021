@@ -2,15 +2,15 @@ suppressMessages(library (readr))
 suppressMessages(library(dplyr))
 suppressMessages(library(DescTools))
 
-datas <- suppressMessages(dplyr::as_tibble(readr::read_csv("../Day01/input.txt")))
+datas <- suppressMessages(dplyr::as_tibble(readr::read_csv("input.txt")))
 colnames(datas)<-c("col0")
 
 func1 <-function (df, colparam,  rownparam ) {
-    df  %>% ungroup() %>% mutate(
-            {{colparam}}:=if_else(if_else(-1+ceiling (.data[[rownparam]]%%4)==0L |.data[[rownparam]]==1,1L,0L)==1L,rown1,0L),
-           {{colparam}}:=if_else(lag(.data[[colparam]],n=1,default=0L)!=0L,lag(.data[[colparam]],n=1,default=0L),.data[[colparam]]),
-           {{colparam}}:=if_else(lag(.data[[colparam]],n=1,default=0L)!=0L,lag(.data[[colparam]],n=1,default=0L),.data[[colparam]]),
-    )
+  df  %>% ungroup() %>% mutate(
+    {{colparam}}:=if_else(if_else(-1+ceiling (.data[[rownparam]]%%4)==0L |.data[[rownparam]]==1,1L,0L)==1L,rown1,0L),
+    {{colparam}}:=if_else(lag(.data[[colparam]],n=1,default=0L)!=0L,lag(.data[[colparam]],n=1,default=0L),.data[[colparam]]),
+    {{colparam}}:=if_else(lag(.data[[colparam]],n=1,default=0L)!=0L,lag(.data[[colparam]],n=1,default=0L),.data[[colparam]]),
+  )
 }
 
 answer<-(      
@@ -31,15 +31,15 @@ answer<-(
 
 
 df_max_val_col<-(answer 
-  %>% filter(rown1>max(answer$rown1)-3)
- %>% filter(col1==max(answer$col1)  |col2==max(answer$col2) | col3==max(answer$col3) |col4==max(answer$col4)  )  
-  %>% mutate (
-      col1=if_else(col1==sum(col1)/3,col1,0L),
-       col2=if_else(col2==sum(col2)/3,col2,0L),     
-       col3=if_else(col3==sum(col3)/3,col3,0L),    
-       col4=if_else(col4==sum(col4)/3,col4,0L),    
-      max_val_col=max(col1,col2,col3,col4)
-   )
+                 %>% filter(rown1>max(answer$rown1)-3)
+                 %>% filter(col1==max(answer$col1)  |col2==max(answer$col2) | col3==max(answer$col3) |col4==max(answer$col4)  )  
+                 %>% mutate (
+                   col1=if_else(col1==sum(col1)/3,col1,0L),
+                   col2=if_else(col2==sum(col2)/3,col2,0L),     
+                   col3=if_else(col3==sum(col3)/3,col3,0L),    
+                   col4=if_else(col4==sum(col4)/3,col4,0L),    
+                   max_val_col=max(col1,col2,col3,col4)
+                 )
 ) 
 
 prev=0 
