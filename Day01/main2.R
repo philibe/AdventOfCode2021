@@ -46,10 +46,10 @@ prev=0
 howmany=0
 for (numligne in 1:unique(df_max_val_col$max_val_col))  {
   rep=0  
-  rep=rep+DescTools::Coalesce((answer %>% filter (UQ(rlang::sym("col1") )==numligne)  %>% group_by(UQ(rlang::sym("col1") )) %>% summarise(rep=sum(col0),.groups="drop_last"))$rep,0)
-  rep=rep+DescTools::Coalesce((answer %>% filter (UQ(rlang::sym("col2") )==numligne)  %>% group_by(UQ(rlang::sym("col2") )) %>% summarise(rep=sum(col0),.groups="drop_last"))$rep,0)
-  rep=rep+DescTools::Coalesce((answer %>% filter (UQ(rlang::sym("col3") )==numligne)  %>% group_by(UQ(rlang::sym("col3") )) %>% summarise(rep=sum(col0),.groups="drop_last"))$rep,0)
-  rep=rep+DescTools::Coalesce((answer %>% filter (UQ(rlang::sym("col4") )==numligne)  %>% group_by(UQ(rlang::sym("col4") )) %>% summarise(rep=sum(col0),.groups="drop_last"))$rep,0)  
+  rep=rep+DescTools::Coalesce((answer %>% filter (col1==numligne)  %>% group_by(col1) %>% summarise(rep=sum(col0),.groups="drop_last"))$rep,0)
+  rep=rep+DescTools::Coalesce((answer %>% filter (col2==numligne)  %>% group_by(col2) %>% summarise(rep=sum(col0),.groups="drop_last"))$rep,0)
+  rep=rep+DescTools::Coalesce((answer %>% filter (col3==numligne)  %>% group_by(col3) %>% summarise(rep=sum(col0),.groups="drop_last"))$rep,0)
+  rep=rep+DescTools::Coalesce((answer %>% filter (col4==numligne)  %>% group_by(col4) %>% summarise(rep=sum(col0),.groups="drop_last"))$rep,0)  
   if (rep >prev) howmany=howmany+1
   prev=rep
 } 
